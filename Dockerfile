@@ -5,25 +5,16 @@ ARG vcs_branch="Unknown"
 ARG build_date="Unknown"
 
 ENV DEHYDRATED_VERSION v0.4.0
-ENV GOPATH /go
 VOLUME /var/dehydrated
 
-RUN apk add --update bash curl openssl ca-certificates jq git go make python py-pip
-RUN pip install awscli
+RUN apk add --update bash curl openssl ca-certificates python py-pip
+RUN pip install boto
 RUN	mkdir -p /var/dehydrated/certs ;\
 	mkdir -p /var/dehydrated/accounts
 
-# Install cli53
-RUN go get github.com/barnybug/cli53 ;\
-    cd $GOPATH/src/github.com/barnybug/cli53 ;\
-    make build ;\
-    chmod a+x cli53 ;\
-    ln -s $GOPATH/src/github.com/barnybug/cli53/cli53 /bin/cli53 ;\
-    rm -rf /var/cache/apk/*
-
 # Install route53 hook
-COPY route53hook.sh /opt/route53hook.sh
-RUN chmod a+x /opt/route53hook.sh
+COPY route53.py /opt/route53.py
+RUN chmod a+x /opt/route53.py
 
 WORKDIR /opt
 
@@ -37,4 +28,4 @@ ENTRYPOINT ["/opt/dehydrated-0.4.0/dehydrated", "--accept-terms"]
 LABEL org.label-schema.vcs-ref=$vcs_ref \
       org.label-schema.vcs-branch=$vcs_branch \
 	  org.label-schema.build-date=$build_date \
-	  maintainer="jose@armesto.net"
+	  maintainer="demian@opentierra.com"
