@@ -1,4 +1,4 @@
-# Dehydrated, Route53 and S3
+# Dehydrated, Route53 
 This is a docker image that uses [dehydrated](https://github.com/lukas2511/dehydrated) to issue Let's Encrypt certificates.
 It automatically tries to pass the dns-01 challenge using an dehydrated hook.
 
