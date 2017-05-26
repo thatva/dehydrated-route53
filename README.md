@@ -8,5 +8,6 @@ docker run -it \
    -e AWS_ACCESS_KEY_ID=<your_key> \
    -e AWS_SECRET_ACCESS_KEY=<your_secret> \
    -v /var/dehydrated:/var/dehydrated \
+   thatva/letsencrypt-route53 \
    -c -d <domain>
 ```
