@@ -1,9 +1,5 @@
 FROM alpine:3.4
 
-ARG vcs_ref="Unknown"
-ARG vcs_branch="Unknown"
-ARG build_date="Unknown"
-
 ENV DEHYDRATED_VERSION v0.4.0
 VOLUME /var/dehydrated
 
@@ -25,7 +21,5 @@ RUN tar -zxf dehydrated.tar.gz
 
 ENTRYPOINT ["/opt/dehydrated-0.4.0/dehydrated", "--accept-terms"]
 
-LABEL org.label-schema.vcs-ref=$vcs_ref \
-      org.label-schema.vcs-branch=$vcs_branch \
-	  org.label-schema.build-date=$build_date \
-	  maintainer="demian@opentierra.com"
+LABEL maintainer="demian@opentierra.com" 
+	  
